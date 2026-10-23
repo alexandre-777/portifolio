@@ -1,0 +1,303 @@
+/* =====================================================
+   STYLE.CSS - Portfólio de Alexandre Santana Farias
+   Estratégia Mobile First: o CSS base é para celular
+   e as media queries (min-width) ampliam o layout.
+   ===================================================== */
+
+/* ---------- 1. VARIÁVEIS DE COR (tema claro e escuro) ---------- */
+:root {
+  --cor-fundo: #ffffff;
+  --cor-fundo-alternado: #f4f4f4;
+  --cor-cartao: #ffffff;
+  --cor-texto: #111111;
+  --cor-texto-suave: #555555;
+  --cor-borda: #e2e2e2;
+  --cor-primaria: #e85d04;          /* laranja */
+  --cor-primaria-forte: #c44a00;
+  --cor-sobre-primaria: #ffffff;    /* texto em cima do laranja */
+  --sombra: 0 6px 24px rgba(0, 0, 0, 0.08);
+  --sombra-forte: 0 14px 34px rgba(232, 93, 4, 0.22);
+
+  --fonte-titulo: "Sora", sans-serif;
+  --fonte-texto: "DM Sans", sans-serif;
+  --raio: 16px;
+  --altura-cabecalho: 68px;
+  --transicao: 0.3s ease;
+}
+
+/* O JavaScript troca o atributo data-tema no <html> */
+:root[data-tema="escuro"] {
+  --cor-fundo: #000000;
+  --cor-fundo-alternado: #0d0d0d;
+  --cor-cartao: #141414;
+  --cor-texto: #f5f5f5;
+  --cor-texto-suave: #a8a8a8;
+  --cor-borda: #2a2a2a;
+  --cor-primaria: #ff7b1c;
+  --cor-primaria-forte: #ff9647;
+  --cor-sobre-primaria: #000000;
+  --sombra: 0 6px 24px rgba(0, 0, 0, 0.6);
+  --sombra-forte: 0 14px 34px rgba(255, 123, 28, 0.25);
+}
+
+/* ---------- 2. RESET E BASE ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; scroll-padding-top: var(--altura-cabecalho); }
+
+body {
+  font-family: var(--fonte-texto);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--cor-texto);
+  background: var(--cor-fundo);
+  /* transição suave na troca de tema */
+  transition: background-color var(--transicao), color var(--transicao);
+}
+
+img, svg { max-width: 100%; display: block; }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; cursor: pointer; border: none; background: none; }
+
+:focus-visible { outline: 3px solid var(--cor-primaria); outline-offset: 3px; }
+
+h1, h2, h3, h4 { font-family: var(--fonte-titulo); line-height: 1.2; }
+
+/* ---------- 3. SCROLLBAR PERSONALIZADA ---------- */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--cor-fundo-alternado); }
+::-webkit-scrollbar-thumb { background: var(--cor-primaria); border-radius: 10px; border: 2px solid var(--cor-fundo-alternado); }
+::-webkit-scrollbar-thumb:hover { background: var(--cor-primaria-forte); }
+html { scrollbar-color: var(--cor-primaria) var(--cor-fundo-alternado); } /* Firefox */
+
+/* ---------- 4. LAYOUT GERAL ---------- */
+.container { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 1.25rem; }
+
+.secao { padding: 4.5rem 0; transition: background-color var(--transicao); }
+.secao--alternada { background: var(--cor-fundo-alternado); }
+
+.secao__titulo { font-size: 1.9rem; margin-bottom: 1.5rem; }
+.secao__subtitulo { font-size: 1.25rem; margin: 2.5rem 0 1.25rem; }
+.secao__intro { color: var(--cor-texto-suave); margin: -0.75rem 0 2rem; }
+
+/* Grades: 1 coluna no celular. Em telas maiores, ganham colunas (ver media queries) */
+.grade { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+
+/* ---------- 5. CABEÇALHO E MENU ---------- */
+.cabecalho {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: var(--altura-cabecalho);
+  background: color-mix(in srgb, var(--cor-fundo) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--cor-borda);
+  transition: background-color var(--transicao), border-color var(--transicao);
+}
+.cabecalho__interno { display: flex; align-items: center; justify-content: space-between; height: 100%; }
+
+.logo { font-family: var(--fonte-titulo); font-weight: 800; font-size: 1.3rem; }
+.logo span { color: var(--cor-primaria); }
+
+.cabecalho__acoes { display: flex; gap: 0.5rem; }
+
+.botao-icone {
+  width: 42px; height: 42px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 1.15rem;
+  border: 1px solid var(--cor-borda);
+  transition: background-color var(--transicao), color var(--transicao), transform var(--transicao);
+}
+.botao-icone:hover { background: var(--cor-primaria); color: var(--cor-sobre-primaria); transform: scale(1.08); }
+
+/* Menu mobile: painel escondido que desliza para baixo */
+.menu {
+  position: absolute; top: var(--altura-cabecalho); left: 0; right: 0;
+  display: flex; flex-direction: column;
+  background: var(--cor-fundo);
+  border-bottom: 1px solid var(--cor-borda);
+  max-height: 0; overflow: hidden; visibility: hidden;
+  transition: max-height var(--transicao), visibility var(--transicao), background-color var(--transicao);
+}
+.menu.aberto { max-height: 360px; visibility: visible; }
+.menu__link { padding: 1rem 1.25rem; font-weight: 500; transition: color var(--transicao), background-color var(--transicao); }
+.menu__link:hover { color: var(--cor-primaria); background: var(--cor-fundo-alternado); }
+
+/* ---------- 6. HERO ---------- */
+.hero { min-height: 100svh; display: flex; align-items: center; padding: calc(var(--altura-cabecalho) + 2rem) 0 3rem; }
+.hero__saudacao { color: var(--cor-primaria); font-weight: 700; font-size: 1.1rem; }
+.hero__nome { font-size: clamp(2.3rem, 9vw, 4.6rem); font-weight: 800; letter-spacing: -0.02em; margin: 0.4rem 0 1rem; max-width: 14ch; }
+.hero__digitando { font-family: var(--fonte-titulo); font-size: clamp(1.1rem, 4vw, 1.6rem); min-height: 2.2em; }
+.cursor { display: inline-block; width: 3px; height: 1.1em; margin-left: 4px; vertical-align: text-bottom; background: var(--cor-primaria); animation: piscar 0.9s steps(1) infinite; }
+.hero__descricao { max-width: 46ch; margin: 0.75rem 0 2rem; color: var(--cor-texto-suave); font-size: 1.1rem; }
+.hero__botoes { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+
+/* ---------- 7. BOTÕES ---------- */
+.botao {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.55rem;
+  padding: 0.9rem 1.6rem; border-radius: 999px; font-weight: 700;
+  border: 2px solid var(--cor-primaria);
+  transition: transform var(--transicao), box-shadow var(--transicao), background-color var(--transicao), color var(--transicao);
+}
+.botao--primario { background: var(--cor-primaria); color: var(--cor-sobre-primaria); }
+.botao--contorno { color: var(--cor-primaria); }
+.botao:hover { transform: translateY(-3px); box-shadow: var(--sombra-forte); }
+.botao--primario:hover { background: var(--cor-primaria-forte); border-color: var(--cor-primaria-forte); }
+.botao--contorno:hover { background: var(--cor-primaria); color: var(--cor-sobre-primaria); }
+.botao--pequeno { padding: 0.55rem 1.1rem; font-size: 0.9rem; }
+.botao--desativado, .estudo__link--desativado { opacity: 0.55; pointer-events: none; }
+
+/* ---------- 8. HABILIDADES ---------- */
+.grade--habilidades { grid-template-columns: repeat(2, 1fr); }
+.habilidade {
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem; text-align: center;
+  padding: 1.4rem 0.8rem; background: var(--cor-cartao); border: 1px solid var(--cor-borda); border-radius: var(--raio);
+  font-weight: 500;
+  transition: transform var(--transicao), border-color var(--transicao), box-shadow var(--transicao), background-color var(--transicao);
+}
+.habilidade i { font-size: 2rem; color: var(--cor-primaria); }
+.habilidade:hover { transform: translateY(-6px); border-color: var(--cor-primaria); box-shadow: var(--sombra); }
+
+.sobre__texto { max-width: 70ch; color: var(--cor-texto-suave); font-size: 1.05rem; }
+
+/* ---------- 9. FORMAÇÃO (ROADMAP) ---------- */
+.cartao-formacao {
+  background: var(--cor-cartao); border: 1px solid var(--cor-borda); border-top: 5px solid var(--cor-primaria);
+  border-radius: var(--raio); padding: 1.6rem; box-shadow: var(--sombra);
+  transition: background-color var(--transicao), border-color var(--transicao);
+}
+.cartao-formacao__topo { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 2rem; }
+.cartao-formacao__topo > i { font-size: 2.2rem; color: var(--cor-primaria); }
+.cartao-formacao__topo h3 { font-size: 1.25rem; margin-bottom: 0.3rem; }
+.cartao-formacao__topo p { color: var(--cor-texto-suave); font-size: 0.95rem; }
+
+/* No celular a linha do tempo é vertical */
+.roadmap { position: relative; display: flex; flex-direction: column; gap: 1.6rem; }
+.roadmap::before { content: ""; position: absolute; left: 23px; top: 10px; bottom: 10px; width: 2px; background: var(--cor-borda); }
+.etapa { position: relative; display: flex; align-items: center; gap: 1rem; }
+.etapa h4 { font-size: 1.05rem; }
+.etapa__icone {
+  flex-shrink: 0; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; font-size: 1.3rem;
+  background: var(--cor-cartao); border: 2px solid var(--cor-borda); color: var(--cor-texto-suave);
+  transition: background-color var(--transicao), border-color var(--transicao);
+}
+.etapa__status { font-size: 0.85rem; color: var(--cor-texto-suave); }
+.etapa--atual .etapa__icone { background: var(--cor-primaria); border-color: var(--cor-primaria); color: var(--cor-sobre-primaria); animation: pulsar 2s infinite; }
+.etapa--atual .etapa__status { color: var(--cor-primaria); font-weight: 700; }
+.etapa--proxima .etapa__icone { border-color: var(--cor-primaria); color: var(--cor-primaria); }
+.etapa--futura { opacity: 0.7; }
+
+/* ---------- 10. PROJETOS ---------- */
+.projeto {
+  display: flex; flex-direction: column; overflow: hidden;
+  background: var(--cor-cartao); border: 1px solid var(--cor-borda); border-radius: 22px; box-shadow: var(--sombra);
+  transition: transform var(--transicao), box-shadow var(--transicao), border-color var(--transicao), background-color var(--transicao);
+}
+.projeto:hover { transform: translateY(-8px); box-shadow: var(--sombra-forte); border-color: var(--cor-primaria); }
+
+/* Espaço da imagem: troque por <img> quando tiver prints dos projetos */
+.projeto__imagem { height: 170px; display: grid; place-items: center; font-size: 3.4rem; background: #000; color: var(--cor-primaria); }
+.projeto__corpo { display: flex; flex-direction: column; gap: 0.8rem; padding: 1.4rem; flex: 1; }
+.projeto__corpo h3 { font-size: 1.2rem; }
+.projeto__corpo p { color: var(--cor-texto-suave); font-size: 0.95rem; }
+.projeto__botoes { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: auto; }
+.projeto--vazio { border-style: dashed; box-shadow: none; }
+.projeto--vazio .projeto__imagem { background: transparent; }
+
+.etiquetas { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.etiquetas li { font-size: 0.8rem; font-weight: 700; padding: 0.25rem 0.75rem; border-radius: 999px; background: var(--cor-fundo-alternado); border: 1px solid var(--cor-borda); }
+
+/* ---------- 11. REPOSITÓRIOS DE ESTUDO ---------- */
+.estudo__link {
+  display: flex; align-items: center; gap: 1rem; padding: 1.1rem 1.25rem;
+  background: var(--cor-cartao); border: 1px solid var(--cor-borda); border-left: 4px solid var(--cor-primaria); border-radius: 12px;
+  transition: transform var(--transicao), box-shadow var(--transicao), background-color var(--transicao), border-color var(--transicao);
+}
+.estudo__link i { font-size: 1.8rem; color: var(--cor-primaria); }
+.estudo__link span { display: flex; flex-direction: column; line-height: 1.35; }
+.estudo__link small { color: var(--cor-texto-suave); }
+.estudo__link:hover { transform: translateX(6px); box-shadow: var(--sombra); }
+
+/* ---------- 12. CONTATO ---------- */
+.contato {
+  display: flex; flex-direction: column; align-items: center; gap: 0.7rem; padding: 2rem 1rem;
+  background: var(--cor-cartao); border: 2px solid var(--cor-borda); border-radius: 22px; font-weight: 700;
+  transition: transform var(--transicao), border-color var(--transicao), background-color var(--transicao), color var(--transicao), box-shadow var(--transicao);
+}
+.contato i { font-size: 2.6rem; }
+.contato:hover { transform: translateY(-8px) scale(1.02); color: #fff; }
+/* Cada rede tem a sua cor no hover */
+.contato--email:hover     { background: var(--cor-primaria); border-color: var(--cor-primaria); color: var(--cor-sobre-primaria); }
+.contato--linkedin:hover  { background: #0a66c2; border-color: #0a66c2; }
+.contato--github:hover    { background: #24292f; border-color: #24292f; }
+.contato--whatsapp:hover  { background: #25d366; border-color: #25d366; color: #05290f; }
+.contato--instagram:hover { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); border-color: #dc2743; }
+
+/* ---------- 13. RODAPÉ E VOLTAR AO TOPO ---------- */
+.rodape { padding: 2rem 0; text-align: center; border-top: 1px solid var(--cor-borda); color: var(--cor-texto-suave); font-size: 0.95rem; transition: border-color var(--transicao); }
+.coracao { color: var(--cor-primaria); animation: batida 1.4s infinite; display: inline-block; }
+
+.voltar-topo {
+  position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 90; width: 50px; height: 50px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 1.3rem;
+  background: var(--cor-primaria); color: var(--cor-sobre-primaria); box-shadow: var(--sombra-forte);
+  opacity: 0; visibility: hidden; transform: translateY(20px);
+  transition: opacity var(--transicao), visibility var(--transicao), transform var(--transicao), background-color var(--transicao);
+}
+.voltar-topo.visivel { opacity: 1; visibility: visible; transform: translateY(0); }
+.voltar-topo:hover { background: var(--cor-primaria-forte); transform: translateY(-4px); }
+
+/* ---------- 14. ANIMAÇÕES ---------- */
+/* Entrada fade-in-up: o JS adiciona a classe "visivel" quando o elemento aparece na tela */
+.revelar { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.revelar.visivel { opacity: 1; transform: translateY(0); }
+
+@keyframes piscar { 50% { opacity: 0; } }
+@keyframes batida { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.25); } }
+@keyframes pulsar { 0% { box-shadow: 0 0 0 0 rgba(232, 93, 4, 0.5); } 70% { box-shadow: 0 0 0 14px rgba(232, 93, 4, 0); } 100% { box-shadow: 0 0 0 0 rgba(232, 93, 4, 0); } }
+
+/* Respeita quem prefere menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
+  .revelar { opacity: 1; transform: none; }
+}
+
+/* =====================================================
+   MEDIA QUERIES (Mobile First: só aumentam a tela)
+   ===================================================== */
+
+/* ---------- Tablets (a partir de 640px) ---------- */
+@media (min-width: 640px) {
+  .grade--habilidades { grid-template-columns: repeat(3, 1fr); }
+  .grade--cartoes, .grade--estudos, .grade--contatos { grid-template-columns: repeat(2, 1fr); }
+  .container { padding: 0 2rem; }
+}
+
+/* ---------- Notebooks (a partir de 900px): menu horizontal, sem hambúrguer ---------- */
+@media (min-width: 900px) {
+  .botao-hamburguer { display: none; }
+  .menu {
+    position: static; flex-direction: row; gap: 0.25rem; max-height: none; overflow: visible; visibility: visible;
+    background: transparent; border: none;
+  }
+  .menu__link { padding: 0.5rem 0.9rem; border-radius: 999px; }
+
+  /* Roadmap vira horizontal */
+  .roadmap { flex-direction: row; justify-content: space-between; }
+  .roadmap::before { left: 24px; right: 24px; top: 23px; bottom: auto; width: auto; height: 2px; }
+  .etapa { flex: 1; flex-direction: column; text-align: center; gap: 0.6rem; }
+}
+
+/* ---------- Desktops (a partir de 1024px): 3 colunas ---------- */
+@media (min-width: 1024px) {
+  .secao { padding: 6rem 0; }
+  .grade--cartoes, .grade--estudos, .grade--contatos { grid-template-columns: repeat(3, 1fr); }
+  .grade--habilidades { grid-template-columns: repeat(4, 1fr); }
+  .secao__titulo { font-size: 2.3rem; }
+  .cartao-formacao { padding: 2.4rem; }
+}
+
+/* ---------- Monitores grandes (a partir de 1440px) ---------- */
+@media (min-width: 1440px) {
+  .container { max-width: 1280px; }
+  body { font-size: 1.05rem; }
+}
