@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="claro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfólio de Alexandre Santana Farias, estudante de Desenvolvimento Full Stack.">
+  <title>Alexandre Santana Farias | Desenvolvedor Full Stack em formação</title>
+
+  <!-- Fontes do Google Fonts e ícones do Bootstrap: importados SOMENTE via <link> aqui no <head> -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Nosso CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ========== CABEÇALHO ========== -->
+  <header class="cabecalho">
+    <div class="container cabecalho__interno">
+      <a href="#inicio" class="logo" aria-label="Ir para o início">Alexandre<span>.</span></a>
+
+      <nav class="menu" id="menu" aria-label="Menu principal">
+        <a href="#sobre" class="menu__link">Sobre</a>
+        <a href="#formacao" class="menu__link">Formação</a>
+        <a href="#projetos" class="menu__link">Projetos</a>
+        <a href="#estudos" class="menu__link">Estudos</a>
+        <a href="#contato" class="menu__link">Contato</a>
+      </nav>
+
+      <div class="cabecalho__acoes">
+        <button class="botao-icone" id="botao-tema" type="button" aria-label="Alternar entre modo claro e escuro">
+          <i class="bi bi-moon-stars-fill" id="icone-tema"></i>
+        </button>
+        <button class="botao-icone botao-hamburguer" id="botao-menu" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
+          <i class="bi bi-list" id="icone-menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ========== HERO ========== -->
+    <section class="hero" id="inicio">
+      <div class="container hero__interno">
+        <p class="hero__saudacao revelar">Olá, eu sou</p>
+        <h1 class="hero__nome revelar">Alexandre Santana Farias</h1>
+        <p class="hero__digitando revelar">
+          <span id="texto-digitado"></span><span class="cursor" aria-hidden="true"></span>
+        </p>
+        <p class="hero__descricao revelar">Aprendendo a construir interfaces limpas, rápidas e acessíveis, do primeiro ao último pixel.</p>
+        <div class="hero__botoes revelar">
+          <!-- Coloque o arquivo "curriculo.pdf" na mesma pasta do index.html -->
+          <a href="curriculo.docx" class="botao botao--primario" download>
+            <i class="bi bi-download"></i> Baixar meu CV
+          </a>
+          <a href="#contato" class="botao botao--contorno">
+            <i class="bi bi-chat-dots"></i> Vamos conversar
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SOBRE E HABILIDADES ========== -->
+    <section class="secao" id="sobre">
+      <div class="container">
+        <h2 class="secao__titulo revelar">Sobre mim</h2>
+        <p class="sobre__texto revelar">
+          Sou estudante do 1º ano do Ensino Médio Técnico em Informática para Internet pela SESC Escola,
+          em parceria com o SENAC. Com forte foco em programação, iniciei minha trilha de aprendizado
+          me especializando em desenvolvimento Front-end. Nos próximos anos, minha formação se expandirá
+          para o Back-end (2º ano) e o desenvolvimento Mobile (3º ano), construindo uma base sólida para me
+          tornar um Desenvolvedor Full Stack. Sou apaixonado por criar interfaces interativas e busco minha
+          primeira oportunidade na área de tecnologia.
+        </p>
+
+        <h3 class="secao__subtitulo revelar">Habilidades</h3>
+        <ul class="grade grade--habilidades">
+          <li class="habilidade revelar"><i class="bi bi-filetype-html"></i><span>HTML5</span></li>
+          <li class="habilidade revelar"><i class="bi bi-filetype-css"></i><span>CSS3</span></li>
+          <li class="habilidade revelar"><i class="bi bi-filetype-js"></i><span>JavaScript</span></li>
+          <li class="habilidade revelar"><i class="bi bi-puzzle"></i><span>Lógica de Programação</span></li>
+          <li class="habilidade revelar"><i class="bi bi-diagram-3"></i><span>Algoritmos</span></li>
+          <li class="habilidade revelar"><i class="bi bi-git"></i><span>Git</span></li>
+          <li class="habilidade revelar"><i class="bi bi-github"></i><span>GitHub</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ========== FORMAÇÃO (ROADMAP) ========== -->
+    <section class="secao secao--alternada" id="formacao">
+      <div class="container">
+        <h2 class="secao__titulo revelar">Formação</h2>
+
+        <article class="cartao-formacao revelar">
+          <div class="cartao-formacao__topo">
+            <i class="bi bi-mortarboard-fill"></i>
+            <div>
+              <h3>Técnico em Informática para Internet</h3>
+              <p>Ensino Médio integrado · SESC Escola em parceria com o SENAC · Conclusão em 2026</p>
+            </div>
+          </div>
+
+          <!-- Linha do tempo: 3 etapas com status -->
+          <ol class="roadmap">
+            <li class="etapa etapa--atual">
+              <span class="etapa__icone"><i class="bi bi-window-stack"></i></span>
+              <div>
+                <h4>1º ano: Front-end</h4>
+                <span class="etapa__status">Em andamento</span>
+              </div>
+            </li>
+            <li class="etapa etapa--proxima">
+              <span class="etapa__icone"><i class="bi bi-hdd-network"></i></span>
+              <div>
+                <h4>2º ano: Back-end</h4>
+                <span class="etapa__status">Próximo passo</span>
+              </div>
+            </li>
+            <li class="etapa etapa--futura">
+              <span class="etapa__icone"><i class="bi bi-phone"></i></span>
+              <div>
+                <h4>3º ano: Mobile</h4>
+                <span class="etapa__status">Futuro</span>
+              </div>
+            </li>
+          </ol>
+        </article>
+      </div>
+    </section>
+
+    <!-- ========== PROJETOS ========== -->
+    <section class="secao" id="projetos">
+      <div class="container">
+        <h2 class="secao__titulo revelar">Projetos de destaque</h2>
+
+        <div class="grade grade--cartoes">
+          <!-- Projeto 1 -->
+          <article class="projeto revelar">
+            <div class="projeto__imagem"><i class="bi bi-music-note-beamed"></i></div>
+            <div class="projeto__corpo">
+              <h3>Compasso Musical</h3>
+              <p>Site interativo sobre música, criado para praticar estrutura semântica e estilização com CSS.</p>
+              <ul class="etiquetas">
+                <li>HTML</li><li>CSS</li><li>JavaScript</li>
+              </ul>
+              <div class="projeto__botoes">
+                <a href="https://alexandre-777.github.io/compasso-musical/" class="botao botao--primario botao--pequeno" target="_blank" rel="noopener noreferrer">
+                  <i class="bi bi-box-arrow-up-right"></i> Ver site
+                </a>
+                <!-- Quando criar o repositório, troque href="#" pelo link do GitHub e remova a classe "botao--desativado" -->
+                <a href="#" class="botao botao--contorno botao--pequeno botao--desativado" aria-disabled="true">
+                  <i class="bi bi-github"></i> Repositório em breve
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Projeto 2 -->
+          <article class="projeto revelar">
+            <div class="projeto__imagem"><i class="bi bi-robot"></i></div>
+            <div class="projeto__corpo">
+              <h3>Projeto Robô Maker</h3>
+              <p>Página de apresentação de um projeto de robótica, com layout responsivo e visual moderno.</p>
+              <ul class="etiquetas">
+                <li>HTML</li><li>CSS</li><li>JavaScript</li>
+              </ul>
+              <div class="projeto__botoes">
+                <a href="https://alexandre-777.github.io/projeto-robomaker/" class="botao botao--primario botao--pequeno" target="_blank" rel="noopener noreferrer">
+                  <i class="bi bi-box-arrow-up-right"></i> Ver site
+                </a>
+                <a href="#" class="botao botao--contorno botao--pequeno botao--desativado" aria-disabled="true">
+                  <i class="bi bi-github"></i> Repositório em breve
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Espaço reservado para o próximo projeto -->
+          <article class="projeto projeto--vazio revelar">
+            <div class="projeto__imagem"><i class="bi bi-plus-lg"></i></div>
+            <div class="projeto__corpo">
+              <h3>Próximo projeto</h3>
+              <p>Um novo desafio está sendo preparado. Volte em breve.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== REPOSITÓRIOS DE ESTUDO ========== -->
+    <section class="secao secao--alternada" id="estudos">
+      <div class="container">
+        <h2 class="secao__titulo revelar">Repositórios de estudo</h2>
+        <p class="secao__intro revelar">Anotações e exercícios feitos em sala de aula.</p>
+
+        <ul class="grade grade--estudos">
+          <li class="estudo revelar">
+            <a href="https://github.com/alexandre-777/html" class="estudo__link" target="_blank" rel="noopener noreferrer">
+              <i class="bi bi-filetype-html"></i>
+              <span><strong>Trilha de HTML e CSS</strong><small>Ver no GitHub</small></span>
+            </a>
+          </li>
+          <li class="estudo revelar">
+            <a href="https://github.com/alexandre-777/JavaScript" class="estudo__link" target="_blank" rel="noopener noreferrer">
+              <i class="bi bi-filetype-js"></i>
+              <span><strong>Trilha de JavaScript Vanilla</strong><small>Ver no GitHub</small></span>
+            </a>
+          </li>
+          <li class="estudo revelar">
+            <a href="https://github.com/alexandre-777/algoritimos" class="estudo__link" target="_blank" rel="noopener noreferrer">
+              <i class="bi bi-diagram-3"></i>
+              <span><strong>Lógica e Algoritmos (Portugol)</strong><small>Ver no GitHub</small></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ========== CONTATO (SEM FORMULÁRIO) ========== -->
+    <section class="secao" id="contato">
+      <div class="container">
+        <h2 class="secao__titulo revelar">Vamos conversar?</h2>
+        <p class="secao__intro revelar">Escolha o canal que preferir. Respondo por todos eles.</p>
+
+        <div class="grade grade--contatos">
+          <a href="mailto:santanaalexandre1955@gmail.com" class="contato contato--email revelar">
+            <i class="bi bi-envelope-fill"></i><span>E-mail</span>
+          </a>
+          <!-- LinkedIn em branco por enquanto: troque href="#" pelo seu link -->
+          <a href="#" class="contato contato--linkedin revelar" target="_blank" rel="noopener noreferrer">
+            <i class="bi bi-linkedin"></i><span>LinkedIn</span>
+          </a>
+          <a href="https://github.com/alexandre-777" class="contato contato--github revelar" target="_blank" rel="noopener noreferrer">
+            <i class="bi bi-github"></i><span>GitHub</span>
+          </a>
+          <a href="https://wa.me/5565984128562" class="contato contato--whatsapp revelar" target="_blank" rel="noopener noreferrer">
+            <i class="bi bi-whatsapp"></i><span>WhatsApp</span>
+          </a>
+          <a href="https://instagram.com/xxandinho1_" class="contato contato--instagram revelar" target="_blank" rel="noopener noreferrer">
+            <i class="bi bi-instagram"></i><span>Instagram</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========== RODAPÉ ========== -->
+  <footer class="rodape">
+    <div class="container">
+      <p>Copyright &copy; <span id="ano-atual">2026</span> Alexandre Santana Farias</p>
+      <p>Desenvolvido com <i class="bi bi-heart-fill coracao" aria-label="amor"></i> por Alexandre Santana Farias</p>
+    </div>
+  </footer>
+
+  <!-- Botão flutuante: Voltar ao topo -->
+  <button class="voltar-topo" id="botao-topo" type="button" aria-label="Voltar ao topo">
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
+  <!-- Nosso JavaScript (no final do body para o HTML carregar primeiro) -->
+  <script src="script.js"></script>
+</body>
+</html>
